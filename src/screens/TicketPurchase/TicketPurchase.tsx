@@ -3,6 +3,8 @@ import React from 'react'
 import Select from 'react-select';
 import { useState } from 'react';
 import { Formik, useFormik } from 'formik';
+import Button from '@mui/material/Button'
+import { margin } from '@mui/system';
 
 
 const options = [
@@ -17,15 +19,15 @@ const options2 = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const formik = useFormik({
-  initialValues:{},
-  onSubmit:value => {
-    console.log(value)
-  }
-})
 
-export default () => {
-  
+
+function TicketPurchase(){
+  const formik = useFormik({
+    initialValues:{},
+    onSubmit:value => {
+      console.log(value)
+    }
+  })
   return (
     <div className='Screen'>
      <h1>Purchase Ticket</h1>
@@ -35,9 +37,11 @@ export default () => {
           
           <h3>Choose where do you want to sit</h3>
           <Select options={options2}/>
-          <button type="submit">Buy ticket</button>
+          <p></p>
+          <Button variant="contained" margin-top="10px">Contained</Button>
       </form>
       </div>
   );
 }
 
+export default TicketPurchase
