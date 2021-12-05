@@ -6,12 +6,11 @@ import Button from '@mui/material/Button'
 import MovieManagement from './screens/MovieManagement/MovieManagement';
 import ScreeingManagement from './screens/ScreeingManagement/ScreeingManagement';
 import TicketPurchase from './screens/TicketPurchase/TicketPurchase';
-import { useInormation } from './commons/context';
+
 
 
 function App() {
 
-  const {screens, tickets,movies,setScreen,setTicket,setMovie} = useInormation();
   
 
   return (
@@ -47,10 +46,7 @@ function App() {
       >
       Edit Movies
       </Button>
-      <Button
-      onClick={() => setScreen('piraci',120,'123123123123',0,0)}>
-        firebase check
-      </Button>
+      
       </div>
       </div>
       <div><hr/></div>

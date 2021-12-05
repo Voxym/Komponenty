@@ -7,9 +7,9 @@ import Paper from "@material-ui/core/Paper";
 
 interface Props {
     rows: Array<{
-        title: string;
+        name: string;
         type: string;
-        duration: number | null;
+        duration: number ;
     }>;
 }
 
@@ -26,8 +26,8 @@ export function MyTable({ rows }: Props) {
                 </TableHead>
                 <TableBody>
                     {rows.map(row => (
-                        <TableRow key={row.title}>
-                            <TableCell>{row.title}</TableCell>
+                        <TableRow key={row.name}>
+                            <TableCell>{row.name}</TableCell>
                             <TableCell>{row.type}</TableCell>
                             <TableCell>{row.duration}</TableCell>
                         </TableRow>
