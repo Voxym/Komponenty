@@ -9,22 +9,24 @@ import React, {
 
   import { getFirestore , collection, getDocs, setDoc, doc, deleteDoc} from "firebase/firestore"
 
+
+
+// Your web app's Firebase configuration
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBBqvJnBaaBRGeMoeQyn1PhiIE9pq2ihCE",
-  authDomain: "pb-aiook.firebaseapp.com",
-  databaseURL: "https://pb-aiook-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "pb-aiook",
-  storageBucket: "pb-aiook.appspot.com",
-  messagingSenderId: "248719415794",
-  appId: "1:248719415794:web:d1487af3bc0034d581f36b"
+  apiKey: "AIzaSyDl1u6RnXGg3OLuv-xs8xhE4HvhwbMXe0E",
+  authDomain: "aiook-4ddd5.firebaseapp.com",
+  projectId: "aiook-4ddd5",
+  storageBucket: "aiook-4ddd5.appspot.com",
+  messagingSenderId: "842425932207",
+  appId: "1:842425932207:web:d21c2dd12cb3e5c93db75a"
 };
+
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
@@ -35,9 +37,28 @@ export const db = getFirestore();
       type: string,
       duration: number,
   }
+
+  interface Screen {
+    movieName: string,
+    roomNumber: number,
+    date: string,
+    soldTickets: number,
+    occupiedSeats: number,
+  }
+    
+  interface Ticket {
+    holderName: string,
+    movieName: string,
+    date: string,
+    seatNumber: number,
+    
+  }
+  
   
   interface ContextProps {
     movies: Movie[];
+    screens: Screen[];
+    tickets : Ticket[];
     setMovie: (
       name: string,
       type: string,
@@ -46,13 +67,29 @@ export const db = getFirestore();
     deleteMovie: (
       name: string
     ) => void,
-    
+    setScreen: (
+      movieName: string,
+      roomNumber: number,
+      date: string,
+      soldTickets: number,
+      occupiedSeats: number
+    ) => void,
+    setTicket: (
+      holderName: string,
+      movieName: string,
+      date: string,
+      seatNumber: number,
+    ) => void,
   }
   
   const InformationContext = createContext<ContextProps>({
     movies: [],
+    screens: [],
+    tickets: [],
     setMovie: () => {},
-    deleteMovie: () => {}
+    deleteMovie: () => {},
+    setScreen: () => {},
+    setTicket: () => {},
   });
   
   export const useInormation = () => useContext(InformationContext);
@@ -63,6 +100,8 @@ export const db = getFirestore();
   
   export default ({children} : InboxContextProps) => {
     const [movies,setMovies] = useState();
+    const [screens,setScreens] = useState();
+    const [tickets, setTickets] = useState();
 
     useEffect(()=> {
       const getMovies = async () => {
@@ -78,7 +117,87 @@ export const db = getFirestore();
         }    
       }
       getMovies();
-    },[movies])
+    },[])
+
+    useEffect(()=> {
+      const getScreens = async () => {
+        try {
+          // @ts-ignore
+        const resp = [];
+        (await getDocs(collection(db, 'Screens'))).forEach(o=>resp.push(o.data()));
+        // @ts-ignore
+        setScreens(resp);
+        }
+        catch (e) {
+          console.log(e)
+        }    
+      }
+      getScreens();
+    },[])
+
+    useEffect(()=> {
+      const getTickets = async () => {
+        try {
+          // @ts-ignore
+        const resp = [];
+        (await getDocs(collection(db, 'Tickets'))).forEach(o=>resp.push(o.data()));
+        // @ts-ignore
+        setTickets(resp);
+        }
+        catch (e) {
+          console.log(e)
+        }    
+      }
+      getTickets();
+    },[])
+
+    const setScreen = useCallback(
+      async (
+        movieName: string,
+        roomNumber: number,
+        date: string,
+        soldTickets: number,
+        occupiedSeats: number) => {
+        try {
+         
+          await setDoc(doc(db, "Screens", movieName), {
+            movieName: movieName,
+            roomNumber: roomNumber,
+            date: date,
+            soldTickets: soldTickets ,
+            occupiedSeats: occupiedSeats ,
+          });
+         
+        } catch (e) {
+         console.log(e)
+        }    
+      },
+      [screens],
+    );
+
+    const setTicket = useCallback(
+      async (
+        holderName: string,
+        movieName: string,
+         date: string,
+           seatNumber: number,
+      ) => {
+        try {
+         
+          await setDoc(doc(db, "Tickets",holderName), {
+            holderName: holderName,
+            movieName: movieName,
+             date: date,
+            seatNumber: seatNumber,
+          });
+         
+        } catch (e) {
+         console.log(e)
+        }    
+      },
+      [],
+    );
+
 
     const setMovie = useCallback(
       async (name: string,
@@ -96,7 +215,7 @@ export const db = getFirestore();
          console.log(e)
         }    
       },
-      [movies],
+      [],
     );
 
     const deleteMovie = useCallback(
@@ -109,7 +228,7 @@ export const db = getFirestore();
          console.log(e)
         }    
       },
-      [movies],
+      [],
     );
 
    
@@ -122,8 +241,14 @@ export const db = getFirestore();
         value={{
           // @ts-ignore
             movies,
+           // @ts-ignore
+            screens,
+            // @ts-ignore
+            tickets,
             setMovie,
             deleteMovie,
+            setScreen,
+            setTicket,
         }}>
         {children}
       </InformationContext.Provider>
