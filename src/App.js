@@ -6,33 +6,12 @@ import Button from '@mui/material/Button'
 import MovieManagement from './screens/MovieManagement/MovieManagement';
 import ScreeingManagement from './screens/ScreeingManagement/ScreeingManagement';
 import TicketPurchase from './screens/TicketPurchase/TicketPurchase';
-import { getFirestore , collection, getDocs} from "firebase/firestore"
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { useEffect ,useState} from 'react';
 import { useInormation } from './commons/context';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBBqvJnBaaBRGeMoeQyn1PhiIE9pq2ihCE",
-  authDomain: "pb-aiook.firebaseapp.com",
-  databaseURL: "https://pb-aiook-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "pb-aiook",
-  storageBucket: "pb-aiook.appspot.com",
-  messagingSenderId: "248719415794",
-  appId: "1:248719415794:web:d1487af3bc0034d581f36b"
-};
-
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore();
 
 function App() {
 
-  const {deleteMovie} = useInormation();
+  const {screens, tickets,movies,setScreen,setTicket,setMovie} = useInormation();
   
 
   return (
@@ -68,7 +47,10 @@ function App() {
       >
       Edit Movies
       </Button>
-     
+      <Button
+      onClick={() => setScreen('piraci',120,'123123123123',0,0)}>
+        firebase check
+      </Button>
       </div>
       </div>
       <div><hr/></div>
