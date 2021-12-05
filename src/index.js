@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {default as InformationContextProvider} from '../src/commons/context'
 
 ReactDOM.render(
   <React.StrictMode>
+    <InformationContextProvider>
     <App />
+    </InformationContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

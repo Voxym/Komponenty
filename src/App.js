@@ -11,6 +11,7 @@ import { getFirestore , collection, getDocs} from "firebase/firestore"
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useEffect ,useState} from 'react';
+import { useInormation } from './commons/context';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,16 +31,10 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 
 function App() {
-const [movies,setMovies] = useState([]);
-  useEffect(()=> {
-    const getMovies = async () => {
-      const resp = [];
-      (await getDocs(collection(db, 'Movies'))).forEach(o=>resp.push(o.data()));
-      setMovies(resp);
-    }
-    getMovies();
-  },[])
-console.log(movies)
+
+  const {deleteMovie} = useInormation();
+  
+
   return (
     <Router>
     <Paper elevation={4}
@@ -72,7 +67,9 @@ console.log(movies)
       to={'/MovieManagement'}
       >
       Edit Movies
-      </Button></div>
+      </Button>
+     
+      </div>
       </div>
       <div><hr/></div>
     
