@@ -6,7 +6,7 @@ import { MyField } from "./MyField";
 interface Values {
     title: string;
     type: string;
-    duration: number | null;
+    duration: number;
 }
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 export const MyForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <Formik
-      initialValues={{ title: '', type: '', duration: null }}
+      initialValues={{ title: '', type: '', duration: 0}}
       onSubmit={(values, { resetForm }) => {
         onSubmit(values);
         resetForm();

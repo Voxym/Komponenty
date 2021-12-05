@@ -68,6 +68,7 @@ export const db = getFirestore();
       name: string
     ) => void,
     setScreen: (
+      screenName: string,
       movieName: string,
       roomNumber: number,
       date: string,
@@ -92,7 +93,7 @@ export const db = getFirestore();
     setTicket: () => {},
   });
   
-  export const useInormation = () => useContext(InformationContext);
+  export const useInformation = () => useContext(InformationContext);
   
   interface InboxContextProps {
     children: ReactNode;
@@ -152,7 +153,8 @@ export const db = getFirestore();
     },[])
 
     const setScreen = useCallback(
-      async (
+      async ( 
+        screenName: string,
         movieName: string,
         roomNumber: number,
         date: string,
@@ -160,7 +162,7 @@ export const db = getFirestore();
         occupiedSeats: number) => {
         try {
          
-          await setDoc(doc(db, "Screens", movieName), {
+          await setDoc(doc(db, "Screens", screenName), {
             movieName: movieName,
             roomNumber: roomNumber,
             date: date,
