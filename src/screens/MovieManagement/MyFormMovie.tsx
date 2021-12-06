@@ -5,8 +5,10 @@ import { MyField } from "./MyField";
 
 interface Values {
   name: string;
+  coverUrl: string;
+  description: string;
   type: string;
-  duration: number;
+  duration: string;
 }
 
 interface Props {
@@ -16,7 +18,7 @@ interface Props {
 export const MyFormMovie: React.FC<Props> = ({ onSubmit }) => {
   return (
     <Formik
-      initialValues={{ name: '', type: '', duration: 0 }}
+      initialValues={{ name: '',coverUrl: '',description: '', type: '', duration: '' }}
       onSubmit={(values, { resetForm }) => {
         onSubmit(values);
         resetForm();
@@ -31,6 +33,20 @@ export const MyFormMovie: React.FC<Props> = ({ onSubmit }) => {
             component={MyField}
           />
         </div>
+        <div>
+                        <Field
+                            name="coverUrl"
+                            type="string"
+                            placeholder="url for image"
+                            component={MyField} />
+                    </div>
+                    <div>
+                        <Field
+                            name="description"
+                            type="string"
+                            placeholder="description"
+                            component={MyField} />
+                    </div>
         <div>
           <Field
             name="type"

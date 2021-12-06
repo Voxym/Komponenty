@@ -25,7 +25,7 @@ export function MyTableMovie() {
                         <TableCell>{o.name}</TableCell>
                         <TableCell>{o.type}</TableCell>
                         <TableCell>{o.duration}</TableCell>
-                        <Button variant='contained' onClick={() => setMovie(o.name, o.type, o.duration)}>Edit</Button>
+                        
                         <Button variant='contained' onClick={() => deleteMovie(o.name)}>Delete</Button>
                     </TableRow>
                     )) : null }

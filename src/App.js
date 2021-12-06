@@ -26,6 +26,7 @@ function App() {
       variant='contained'>
         Home
       </Button>
+
       <Button 
             className="Button"
 
@@ -34,6 +35,7 @@ function App() {
       variant='contained'>
         Manage Screens
       </Button>
+
       <Button 
             className="Button"
 
@@ -60,6 +62,7 @@ function App() {
     </footer>
     </Paper>
   </Router>
+  
     </MoviesProvider>
    
   

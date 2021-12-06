@@ -44,13 +44,16 @@ interface ContextProps {
   tickets: Ticket[];
   setMovie: (
     name: string,
+    coverUrl: string,
+    description: string,
     type: string,
-    duration: number,
+    duration: string,
   ) => void;
   deleteMovie: (
     name: string
   ) => void,
   setScreen: (
+
     screenName: string,
     movieName: string,
     roomNumber: number,
@@ -141,6 +144,7 @@ export default ({ children }: InformationContextProps) => {
 
   const setScreen = useCallback(
     async (
+    
       screenName: string,
       movieName: string,
       roomNumber: number,
@@ -150,6 +154,7 @@ export default ({ children }: InformationContextProps) => {
       try {
 
         await setDoc(doc(Firebase.db, "Screens", screenName = movieName + roomNumber), {
+          
           movieName: movieName,
           roomNumber: roomNumber,
           date: date,
@@ -195,12 +200,16 @@ export default ({ children }: InformationContextProps) => {
 
   const setMovie = useCallback(
     async (name: string,
+      coverUrl: string,
+      description: string,
       type: string,
-      duration: number) => {
+      duration: string) => {
       try {
 
         await setDoc(doc(Firebase.db, "Movies", name), {
           name: name,
+          coverUrl: coverUrl,
+          description: description,
           type: type,
           duration: duration,
         });

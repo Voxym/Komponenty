@@ -26,11 +26,12 @@ export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
             }}
         >
                 <Form>
-                <div>
+               
+                    <div>
                         <Field
                             name="roomNumber"
                             type="number"
-                            placeholder="room number"
+                            placeholder="number of the hall"
                             component={MyField} />
                     </div>
                     <div>
@@ -39,7 +40,7 @@ export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
                             type="text"
                             placeholder="movie title"
                             component={MyField} />
-                    </div>                    
+                    </div>
                     <div>
                         <Field
                             name="date"
@@ -47,7 +48,7 @@ export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
                             placeholder="date"
                             component={MyField} />
                     </div>
-                   
+
                     <Button variant='contained' type="submit">submit</Button>
                 </Form>
         </Formik>

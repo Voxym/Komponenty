@@ -12,7 +12,7 @@ export default () => {
       <div style={{ textAlign: "center" }}>
         <MyFormMovie
           onSubmit={data => {
-            setMovie(data.name,data.type,data.duration)
+            setMovie(data.name,data.coverUrl,data.description,data.type,data.duration)
           }}
         />
         <MyTableMovie />
