@@ -7,9 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import Button from '@mui/material/Button'
 import { useInformation } from '../../commons/context'
 
-
-
-
 export function MyTableScreen() {
     const { screens, setScreen, deleteScreen } = useInformation();
     return (

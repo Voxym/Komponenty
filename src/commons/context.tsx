@@ -7,30 +7,12 @@ import React, {
   useState,
 } from 'react';
 
-import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore"
+import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore"
+import Firebase from '../core/services/Firebase';
 
 
 
-// Your web app's Firebase configuration
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDl1u6RnXGg3OLuv-xs8xhE4HvhwbMXe0E",
-  authDomain: "aiook-4ddd5.firebaseapp.com",
-  projectId: "aiook-4ddd5",
-  storageBucket: "aiook-4ddd5.appspot.com",
-  messagingSenderId: "842425932207",
-  appId: "1:842425932207:web:d21c2dd12cb3e5c93db75a"
-};
-
-
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore();
 
 interface Movie {
   name: string,
@@ -114,7 +96,7 @@ export default ({ children }: InformationContextProps) => {
       try {
         // @ts-ignore
         const resp = [];
-        (await getDocs(collection(db, 'Movies'))).forEach(o => resp.push(o.data()));
+        (await getDocs(collection(Firebase.db, 'Movies'))).forEach(o => resp.push(o.data()));
         // @ts-ignore
         setMovies(resp);
       }
@@ -130,7 +112,7 @@ export default ({ children }: InformationContextProps) => {
       try {
         // @ts-ignore
         const resp = [];
-        (await getDocs(collection(db, 'Screens'))).forEach(o => resp.push(o.data()));
+        (await getDocs(collection(Firebase.db, 'Screens'))).forEach(o => resp.push(o.data()));
         // @ts-ignore
         setScreens(resp);
       }
@@ -146,7 +128,7 @@ export default ({ children }: InformationContextProps) => {
       try {
         // @ts-ignore
         const resp = [];
-        (await getDocs(collection(db, 'Tickets'))).forEach(o => resp.push(o.data()));
+        (await getDocs(collection(Firebase.db, 'Tickets'))).forEach(o => resp.push(o.data()));
         // @ts-ignore
         setTickets(resp);
       }
@@ -167,7 +149,7 @@ export default ({ children }: InformationContextProps) => {
       occupiedSeats: number) => {
       try {
 
-        await setDoc(doc(db, "Screens", screenName = movieName + roomNumber), {
+        await setDoc(doc(Firebase.db, "Screens", screenName = movieName + roomNumber), {
           movieName: movieName,
           roomNumber: roomNumber,
           date: date,
@@ -180,7 +162,7 @@ export default ({ children }: InformationContextProps) => {
       }
       // @ts-ignore
       const resp = [];
-      (await getDocs(collection(db, 'Screens'))).forEach(o => resp.push(o.data()));
+      (await getDocs(collection(Firebase.db, 'Screens'))).forEach(o => resp.push(o.data()));
       // @ts-ignore
       setScreens(resp);
     },
@@ -196,7 +178,7 @@ export default ({ children }: InformationContextProps) => {
     ) => {
       try {
 
-        await setDoc(doc(db, "Tickets", holderName), {
+        await setDoc(doc(Firebase.db, "Tickets", holderName), {
           holderName: holderName,
           movieName: movieName,
           date: date,
@@ -217,7 +199,7 @@ export default ({ children }: InformationContextProps) => {
       duration: number) => {
       try {
 
-        await setDoc(doc(db, "Movies", name), {
+        await setDoc(doc(Firebase.db, "Movies", name), {
           name: name,
           type: type,
           duration: duration,
@@ -228,7 +210,7 @@ export default ({ children }: InformationContextProps) => {
       }
       // @ts-ignore
       const resp = [];
-      (await getDocs(collection(db, 'Movies'))).forEach(o => resp.push(o.data()));
+      (await getDocs(collection(Firebase.db, 'Movies'))).forEach(o => resp.push(o.data()));
       // @ts-ignore
       setMovies(resp);
     },
@@ -238,7 +220,7 @@ export default ({ children }: InformationContextProps) => {
   const deleteMovie = useCallback(
     async (name: string) => {
       try {
-        await deleteDoc(doc(db, "Movies", name));
+        await deleteDoc(doc(Firebase.db, "Movies", name));
       }
 
       catch (e) {
@@ -246,7 +228,7 @@ export default ({ children }: InformationContextProps) => {
       }
       // @ts-ignore
       const resp = [];
-      (await getDocs(collection(db, 'Movies'))).forEach(o => resp.push(o.data()));
+      (await getDocs(collection(Firebase.db, 'Movies'))).forEach(o => resp.push(o.data()));
       // @ts-ignore
       setMovies(resp);
     },
@@ -256,7 +238,7 @@ export default ({ children }: InformationContextProps) => {
   const deleteScreen = useCallback(
     async (screenName: string) => {
       try {
-        await deleteDoc(doc(db, "Screens", screenName));
+        await deleteDoc(doc(Firebase.db, "Screens", screenName));
       }
 
       catch (e) {
@@ -264,7 +246,7 @@ export default ({ children }: InformationContextProps) => {
       }
       // @ts-ignore
       const resp = [];
-      (await getDocs(collection(db, 'Screens'))).forEach(o => resp.push(o.data()));
+      (await getDocs(collection(Firebase.db, 'Screens'))).forEach(o => resp.push(o.data()));
       // @ts-ignore
       setMovies(resp);
     },

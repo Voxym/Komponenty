@@ -47,20 +47,7 @@ export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
                             placeholder="date"
                             component={MyField} />
                     </div>
-                    <div>
-                        <Field
-                            name="soldTickets"
-                            type="number"
-                            placeholder="sold tickets"
-                            component={MyField} />
-                    </div>
-                    <div>
-                        <Field
-                            name="occupiedSeats"
-                            type="number"
-                            placeholder="occupied seats"
-                            component={MyField} />
-                    </div>
+                   
                     <Button variant='contained' type="submit">submit</Button>
                 </Form>
         </Formik>

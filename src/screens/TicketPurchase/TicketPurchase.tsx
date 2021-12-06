@@ -8,24 +8,19 @@ import { margin } from '@mui/system';
 import { useInformation } from '../../commons/context';
 
 const options2 = [
-  { value: 'movie', label:  },
-  { value: 'room', label:  },
-  { value: 'date', label: },
+  { value: 'movie', label: '' },
+  { value: 'room', label:  ''},
+  { value: 'date', label: ''},
 ]
 
 
 interface Option {
-  
       movieName: string;
       roomNumber: number;
       date: string;
- 
-
-  
 }
 
-
-function TicketPurchase(){
+export default () => {
   const formik = useFormik({
     initialValues:{},
     onSubmit:value => {
@@ -33,27 +28,23 @@ function TicketPurchase(){
     }
   })
 
- const {screens} = useInformation();
+//  const {screens} = useInformation();
   const [selectedOption,setSelectedOption]=useState(null)
  const options:Option[] = []
-  options.map(o => {
+  options.map(o => 
     o.movieName 
-  })
-  return (
-    <div className='Screen'>
-     <h1>Purchase Ticket</h1>
-      <form onSubmit={formik.handleSubmit}>
-          <h3>Select movie from the list</h3>
-          
-          <Select options={options2} onChange={setSelectedOption(selectedOption)} value={selectedOption}/>
-          
-          <h3>Choose where do you want to sit</h3>
-          <Select options={options2}/>
-          <p></p>
-          <Button variant="contained" margin-top="10px">Submit</Button>
-      </form>
-      </div>
-  );
-}
+  )
 
-export default TicketPurchase
+  return <div className='Screen'>
+  <h1>Purchase Ticket</h1>
+   <form onSubmit={formik.handleSubmit}>
+       <h3>Select movie from the list</h3>
+       
+       {/* <Select options={options2} onChange={setSelectedOption} value={selectedOption}/> */}
+       <h3>Choose where do you want to sit</h3>
+       <Select options={options2}/>
+       <p></p>
+       <Button variant="contained" margin-top="10px">Submit</Button>
+   </form>
+   </div>
+}

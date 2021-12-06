@@ -1,14 +1,13 @@
 
-.MainScreen {
-  height: 90vh;
-  width: 95vw;
+.paper {
+  width: 100%;
+  min-height: 97vh;
  display: flex;
- margin : 20px auto;
  flex-direction: column;
+ overflow-x: hidden;
 }
 hr {
   width: 98%;
-
 }
 .Title {
   align-self: center;
@@ -21,12 +20,11 @@ hr {
   justify-content: center;
 }
 footer {
-
 align-self: flex-end;
 margin:5px;
 }
 
 .Button {
-  display: inline-block;
-  margin-right: 30px;
+  min-width: 160px!important;
+  margin-right: 30px!important;
 }

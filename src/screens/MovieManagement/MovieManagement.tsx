@@ -5,10 +5,7 @@ import { MyFormMovie } from './MyFormMovie';
 
 
 export default () => {
-
   const {movies,setMovie} = useInformation();
-
-
 
   return (
     <>
