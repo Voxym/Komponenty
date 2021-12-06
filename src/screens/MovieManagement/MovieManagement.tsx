@@ -1,27 +1,24 @@
 import './styles.css';
-
-import * as React from 'react';
 import {useInformation} from '../../commons/context'
-
-import { MyTable } from './MyTable';
-import { MyForm } from './MyForm';
+import { MyTableMovie } from './MyTableMovie';
+import { MyFormMovie } from './MyFormMovie';
 
 
 export default () => {
 
-  const {movies,setMovie,tickets} = useInformation();
+  const {movies,setMovie} = useInformation();
 
 
 
   return (
     <>
       <div style={{ textAlign: "center" }}>
-        <MyForm
+        <MyFormMovie
           onSubmit={data => {
-            setMovie(data.title,data.type,data.duration)
+            setMovie(data.name,data.type,data.duration)
           }}
         />
-        <MyTable rows={movies} />
+        <MyTableMovie />
       </div>
     </>
   );
