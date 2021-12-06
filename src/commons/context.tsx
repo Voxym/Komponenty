@@ -25,6 +25,7 @@ interface Screen {
   movieName: string,
   roomNumber: number,
   date: string,
+  hour: string,
   soldTickets: number,
   occupiedSeats: number,
 }
@@ -58,6 +59,7 @@ interface ContextProps {
     movieName: string,
     roomNumber: number,
     date: string,
+    hour: string,
     soldTickets: number,
     occupiedSeats: number
   ) => void,
@@ -149,6 +151,7 @@ export default ({ children }: InformationContextProps) => {
       movieName: string,
       roomNumber: number,
       date: string,
+      hour: string,
       soldTickets: number,
       occupiedSeats: number) => {
       try {
@@ -158,6 +161,7 @@ export default ({ children }: InformationContextProps) => {
           movieName: movieName,
           roomNumber: roomNumber,
           date: date,
+          hour: hour,
           soldTickets: soldTickets,
           occupiedSeats: occupiedSeats,
         });
@@ -257,7 +261,7 @@ export default ({ children }: InformationContextProps) => {
       const resp = [];
       (await getDocs(collection(Firebase.db, 'Screens'))).forEach(o => resp.push(o.data()));
       // @ts-ignore
-      setMovies(resp);
+      setScreens(resp);
     },
     [],
   );

@@ -11,7 +11,7 @@ export default () => {
       <div style={{ textAlign: "center" }}>
         <MyFormScreen
           onSubmit={data => {
-            setScreen(data.movieName+data.date,data.movieName,data.roomNumber,data.date, data.soldTickets, data.occupiedSeats)
+            setScreen(data.movieName+data.date,data.movieName,data.roomNumber,data.date,data.hour, data.soldTickets, data.occupiedSeats)
           }}
         />
         <MyTableScreen />

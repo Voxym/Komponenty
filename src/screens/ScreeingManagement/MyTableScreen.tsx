@@ -17,6 +17,7 @@ export function MyTableScreen() {
                         <TableCell>Room Number</TableCell>
                         <TableCell>Movie Name</TableCell>
                         <TableCell>Date</TableCell>
+                        <TableCell>Hour</TableCell>
                         <TableCell>Sold Tickets</TableCell>
                         <TableCell>Occupied Seats</TableCell>
                     </TableRow>
@@ -27,10 +28,13 @@ export function MyTableScreen() {
                         <TableCell>{o.roomNumber}</TableCell>
                         <TableCell>{o.movieName}</TableCell>
                         <TableCell>{o.date}</TableCell>
+                        <TableCell>{o.hour}</TableCell>
                         <TableCell>{o.soldTickets}</TableCell>
                         <TableCell>{o.occupiedSeats}</TableCell>
                         <Button variant='contained'>Edit</Button>
-                        <Button variant='contained'>Delete</Button>
+                        <Button 
+                        onClick={() => deleteScreen(o.movieName + o.roomNumber)}
+                        variant='contained'>Delete</Button>
                     </TableRow>
                     )) : null }
                 </TableBody>

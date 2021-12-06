@@ -8,6 +8,7 @@ interface Values {
     movieName: string,
     roomNumber: number,
     date: string,
+    hour: string,
     soldTickets: number,
     occupiedSeats: number,
 }
@@ -19,7 +20,7 @@ interface Props {
 export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
     return (
         <Formik
-            initialValues={{ movieName: '', roomNumber: 0, date: '', soldTickets: 0, occupiedSeats: 0 }}
+            initialValues={{ movieName: '', roomNumber: 0, date: '',hour: '', soldTickets: 0, occupiedSeats: 0 }}
             onSubmit={(values, { resetForm }) => {
                 onSubmit(values);
                 resetForm();
@@ -46,6 +47,13 @@ export const MyFormScreen: React.FC<Props> = ({ onSubmit }) => {
                             name="date"
                             type="text"
                             placeholder="date"
+                            component={MyField} />
+                    </div>
+                    <div>
+                        <Field
+                            name="hour"
+                            type="text"
+                            placeholder="Hour"
                             component={MyField} />
                     </div>
 
