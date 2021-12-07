@@ -17,7 +17,7 @@ function App() {
     <Paper elevation={4}
     className="paper">
       <h1 className='Title'
-      >CINEMA CITY</h1>
+      >CINEMA</h1>
       <div className='TopBar'>
       <Button 
       className="Button"
@@ -43,7 +43,7 @@ function App() {
       component={Link}
       to={'/MovieManagement'}
       >
-      Edit Movies
+      Manage Movies
       </Button>
       
       </div>

@@ -21,6 +21,7 @@ export default () => {
       <div>
         <p style={styles.title}>{movie.name}</p>
         <p style={styles.description}>{movie.description}</p>
+        <p style={styles.description}>Gatunek: {movie.type}</p>
         <p>Czas seansu: {movie.duration}</p>
         <p>Dostępne godziny</p>
         <p>{movie.seances?.map((o: any) => <Button variant="outlined" style={{ marginRight: 10, width: 100}} onClick={() => setReservationDetails(o) }>{o.hour}</Button>)}</p>

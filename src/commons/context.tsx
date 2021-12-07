@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 
-import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore"
+import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc, arrayUnion} from "firebase/firestore"
 import Firebase from '../core/services/Firebase';
 
 
@@ -15,9 +15,15 @@ import Firebase from '../core/services/Firebase';
 
 
 interface Movie {
+  coverUrl: string,
   name: string,
   type: string,
-  duration: number,
+  description: string,
+  duration: string,
+  seances: [
+    hour: string,
+    roomUid: string,
+  ]
 }
 
 interface Screen {
@@ -146,8 +152,7 @@ export default ({ children }: InformationContextProps) => {
 
   const setScreen = useCallback(
     async (
-    
-      screenName: string,
+    screenName: string,
       movieName: string,
       roomNumber: number,
       date: string,
@@ -156,8 +161,7 @@ export default ({ children }: InformationContextProps) => {
       occupiedSeats: number) => {
       try {
 
-        await setDoc(doc(Firebase.db, "Screens", screenName = movieName + roomNumber), {
-          
+        await setDoc(doc(Firebase.db, "Screens",screenName), {
           movieName: movieName,
           roomNumber: roomNumber,
           date: date,
@@ -165,7 +169,20 @@ export default ({ children }: InformationContextProps) => {
           soldTickets: soldTickets,
           occupiedSeats: occupiedSeats,
         });
+      // @ts-ignore
+      
 
+        await updateDoc(doc(Firebase.db, "Movies",movieName), { 
+         
+          seances: arrayUnion( [
+            {hour: hour,
+            roomUid: roomNumber == 1? '1E59Lqc7lmasmyYeCCEz' : roomNumber,}
+          ])
+            
+          
+        
+        });
+console.log('jestem');
       } catch (e) {
         console.log(e)
       }

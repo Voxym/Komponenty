@@ -63,7 +63,7 @@ export const MyFormMovie: React.FC<Props> = ({ onSubmit }) => {
             component={MyField}
           />
         </div>
-        <Button variant='contained' type="submit">submit</Button>
+        <Button variant='contained' type="submit">Add Movie</Button>
       </Form>
     </Formik>
   );
